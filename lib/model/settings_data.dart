@@ -1,0 +1,3 @@
+class SettingsData {
+  DateTime currentDate;
+}
