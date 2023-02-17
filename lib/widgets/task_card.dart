@@ -3,7 +3,6 @@ import 'package:achiever_app/data/app_theme.dart';
 import 'package:achiever_app/model/task.dart';
 import 'package:achiever_app/widgets/progress_bar.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter/scheduler.dart';
 
 import 'custom_checkbox.dart';
 
@@ -105,7 +104,7 @@ class TaskCard extends StatelessWidget {
     var theme = AppTheme(MediaQuery.of(context).platformBrightness);
     return Container(
       margin: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 8.0),
-      height: task.description == "" ? 60 : 80,
+      height: task.description == "" ? 60 : 85,
       decoration: BoxDecoration(
         color: theme.cardColor,
         borderRadius: BorderRadius.circular(10.0),
