@@ -65,13 +65,16 @@ class HabitsBloc extends Bloc<HabitsEvent, HabitsState> {
 
   Stream<HabitsState> _mapResetAllHabitsToState(ResetAllHabits event) async* {
     if (state is HabitsLoaded) {
-      final List<Habit> updatedHabits = (state as HabitsLoaded).habits.map(
+      final List<Habit> updatedHabits = (state as HabitsLoaded)
+          .habits
+          .map(
             (habit) => Habit(
               id: habit.id,
               title: habit.title,
               doneDays: [false, false, false, false, false, false, false],
             ),
-          );
+          )
+          .toList();
       yield HabitsLoaded(updatedHabits);
     }
   }
@@ -108,7 +111,7 @@ class HabitsBloc extends Bloc<HabitsEvent, HabitsState> {
   }
 
   @override
-  HabitsState fromJson(Map<String, dynamic> json) {
+  HabitsLoaded? fromJson(Map<String, dynamic> json) {
     try {
       final List<Habit> habits = (json["habits"] as Map<String, dynamic>)
           .values
@@ -121,7 +124,7 @@ class HabitsBloc extends Bloc<HabitsEvent, HabitsState> {
   }
 
   @override
-  Map<String, dynamic> toJson(HabitsState state) {
+  Map<String, dynamic>? toJson(HabitsState state) {
     if (state is HabitsLoaded) {
       return {
         "habits": state.habits.map((habit) => habit.toJson()).toList(),
