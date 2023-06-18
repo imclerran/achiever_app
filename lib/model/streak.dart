@@ -8,10 +8,10 @@ class Streak extends Equatable with Comparable {
   final String title;
   final String units;
   final int streakLength;
-  final DateTime lastCompleted;
+  final DateTime? lastCompleted;
 
   Streak({
-    String id,
+    String? id,
     this.title = "",
     this.units = "Days",
     this.streakLength = 0,
