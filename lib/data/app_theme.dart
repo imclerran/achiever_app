@@ -67,18 +67,18 @@ class AppTheme {
 
 class AppThemeLight {
   // Colors:
-  static Color backgroundColor = Colors.grey[100];
+  static Color backgroundColor = Colors.grey[100]!;
   static Color shadowColor = Colors.black12;
   static Color primaryColor = Colors.white;
   static Color cardColor = Colors.white;
-  static Color cardColor2 = Colors.grey[200];
-  static Color disabledColor = Colors.grey[350];
+  static Color cardColor2 = Colors.grey[200]!;
+  static Color disabledColor = Colors.grey[350]!;
   static Color accentColor = Colors.lightBlueAccent;
-  static Color accentColor2 = Colors.tealAccent[200];
+  static Color accentColor2 = Colors.tealAccent[200]!;
   static Color highlightColor = Colors.white;
-  static Color okayColor = Colors.tealAccent[700];
+  static Color okayColor = Colors.tealAccent[700]!;
   static Color warningColor = Colors.orangeAccent;
-  static Color errorColor = Colors.red[400];
+  static Color errorColor = Colors.red[400]!;
 
   static double iconSizeLarge = 32;
   static double iconSizeMedium = 22;
@@ -142,18 +142,18 @@ class AppThemeLight {
 
 class AppThemeDark {
   // Colors:
-  static Color primaryColor = Colors.grey[850];
-  static Color cardColor = Colors.grey[850];
-  static Color cardColor2 = Colors.grey[900];
-  static Color disabledColor = Colors.grey[700];
+  static Color primaryColor = Colors.grey[850]!;
+  static Color cardColor = Colors.grey[850]!;
+  static Color cardColor2 = Colors.grey[900]!;
+  static Color disabledColor = Colors.grey[700]!;
   static Color accentColor = Colors.lightBlueAccent;
-  static Color accentColor2 = Colors.tealAccent[200];
-  static Color backgroundColor = Colors.grey[900];
+  static Color accentColor2 = Colors.tealAccent[200]!;
+  static Color backgroundColor = Colors.grey[900]!;
   static Color shadowColor = Colors.black;
-  static Color highlightColor = Colors.grey[800];
-  static Color okayColor = Colors.tealAccent[200];
-  static Color warningColor = Colors.orange[300];
-  static Color errorColor = Colors.red[300];
+  static Color highlightColor = Colors.grey[800]!;
+  static Color okayColor = Colors.tealAccent[200]!;
+  static Color warningColor = Colors.orange[300]!;
+  static Color errorColor = Colors.red[300]!;
 
   static double iconSizeLarge = 32;
   static double iconSizeMedium = 22;

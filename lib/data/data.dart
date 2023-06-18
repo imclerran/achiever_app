@@ -25,7 +25,11 @@ class Data {
       .where((Task task) => task.isDueAfterThisWeek)
       .toList();
 
-  Data({this.habits, this.tasks, this.weeklyReport, this.userHistory});
+  Data(
+      {required this.habits,
+      required this.tasks,
+      required this.weeklyReport,
+      required this.userHistory});
 }
 
 final data = Data(
