@@ -8,9 +8,9 @@ class UserHistory extends Equatable {
   final int longestHabitsFinishedStreak;
 
   UserHistory({
-    this.mostTasksDoneInWeek,
-    this.longestTasksOnTimeStreak,
-    this.longestHabitsFinishedStreak,
+    required this.mostTasksDoneInWeek,
+    required this.longestTasksOnTimeStreak,
+    required this.longestHabitsFinishedStreak,
   });
 
   @override
