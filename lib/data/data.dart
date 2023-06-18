@@ -32,6 +32,7 @@ class Data {
       required this.userHistory});
 }
 
+final today = DateTime.now();
 final data = Data(
   habits: [
     Habit(title: "Brush your teeth"),
@@ -93,10 +94,14 @@ final data = Data(
     ),
   ],
   weeklyReport: WeeklyReport(
+    weekBegins: DateTime(today.year, today.month, today.day, 0, 0, 0)
+        .subtract(Duration(days: today.weekday)),
     tasksCompleted: 5,
     tasksDue: 7,
     tasksDoneOnTimeStreak: 10,
+    tasksCreated: 0,
     dailyHabitStreak: 36,
+    weeklyHabitStreak: 0,
     tasksDoneInWeekNewBest: false,
     onTimeNewBestStreak: false,
     habitsNewBestStreak: true,
