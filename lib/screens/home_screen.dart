@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:gradient_text/gradient_text.dart';
 import 'package:achiever_app/data/data.dart';
 import 'package:achiever_app/data/app_theme.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
