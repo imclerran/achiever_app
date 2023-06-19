@@ -9,13 +9,13 @@ import 'custom_checkbox.dart';
 class TaskCard extends StatelessWidget {
   final Task task;
 
-  const TaskCard(this.task, {Key key}) : super(key: key);
+  const TaskCard(this.task, {Key? key}) : super(key: key);
 
   Color _getPriorityColor(Task task, AppTheme theme) {
     if (task.priority == TaskPriority.low) return theme.okayColor;
     if (task.priority == TaskPriority.medium) return theme.warningColor;
     if (task.priority == TaskPriority.high) return theme.errorColor;
-    return theme.subtext.color;
+    return theme.subtext.color!;
   }
 
   Color _getDueDateColor(Task task, AppTheme theme) {
@@ -27,7 +27,7 @@ class TaskCard extends StatelessWidget {
   }
 
   Color _getSubtaskColor(Task task, AppTheme theme) {
-    if (task.numSubtasks == 0) return theme.subtext.color;
+    if (task.numSubtasks == 0) return theme.subtext.color!;
     if (task.numSubtasks == task.numSubtasksFinished) return theme.okayColor;
     return theme.okayColor;
   }
@@ -130,7 +130,8 @@ class TaskCard extends StatelessWidget {
                 child: Row(
                   children: [
                     CustomCheckbox(
-                      defaultState: task.isDone,
+                      onPressed: () => {},
+                      defaultState: task.isDone, // TODO: default to done?
                       borderColor: AppThemeLight.accentColor,
                       checkedColor: Colors.transparent,
                       iconColor: AppThemeLight.accentColor,
