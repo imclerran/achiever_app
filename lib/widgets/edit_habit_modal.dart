@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditHabitModal extends StatefulWidget {
   final Habit habit;
-  const EditHabitModal(this.habit, {Key key}) : super(key: key);
+  const EditHabitModal(this.habit, {Key? key}) : super(key: key);
   @override
   _EditHabitModalState createState() => _EditHabitModalState();
 }
@@ -56,7 +56,9 @@ class _EditHabitModalState extends State<EditHabitModal> {
             Expanded(
               child: Theme(
                 data: ThemeData(
-                    hintColor: theme.h6.color, accentColor: theme.accentColor),
+                  hintColor: theme.h6.color,
+                  //accentColor: theme.accentColor, TODO: update themes to new theme standards
+                ),
                 child: TextField(
                   autofocus: true,
                   controller: controller,
