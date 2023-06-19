@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
 
 class CustomCheckbox extends StatefulWidget {
   final Function onPressed;
@@ -13,8 +13,8 @@ class CustomCheckbox extends StatefulWidget {
   final Color checkedColor;
 
   const CustomCheckbox({
-    Key key,
-    this.onPressed,
+    Key? key,
+    required this.onPressed,
     this.defaultState = false,
     this.size = 24,
     this.borderRadius = 6,

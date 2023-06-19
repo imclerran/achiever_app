@@ -8,7 +8,7 @@ class ProgressBar extends StatelessWidget {
   final double height;
 
   const ProgressBar(this.progress, this.total,
-      {Key key, this.borderRadius = 4, this.height = 8})
+      {Key? key, this.borderRadius = 4, this.height = 8})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

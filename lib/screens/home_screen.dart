@@ -4,10 +4,11 @@ import 'package:achiever_app/widgets/report_card.dart';
 import 'package:achiever_app/widgets/task_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gradient_text/gradient_text.dart';
+//import 'package:gradient_text/gradient_text.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:achiever_app/data/data.dart';
 import 'package:achiever_app/data/app_theme.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -35,14 +36,15 @@ class _HomeScreenState extends State<HomeScreen> {
             forceElevated: true,
             floating: true,
             elevation: 4,
-            brightness: theme.brightness,
+            //brightness: theme.brightness, TODO: update theme to latest theme conventions
             flexibleSpace: FlexibleSpaceBar(
               title: GradientText(
                 "Achiever",
-                gradient: LinearGradient(colors: [
-                  AppThemeLight.accentColor,
-                  AppThemeLight.accentColor2
-                ]),
+                colors: [AppThemeLight.accentColor, AppThemeLight.accentColor2],
+                // gradient: LinearGradient(colors: [
+                //   AppThemeLight.accentColor,
+                //   AppThemeLight.accentColor2
+                // ]), TODO: verify new gradient text is working correctly
                 style: TextStyle(
                   fontSize: 32.0,
                   color: AppThemeLight.accentColor,

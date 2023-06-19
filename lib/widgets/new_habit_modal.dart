@@ -53,7 +53,9 @@ class _NewHabitModalState extends State<NewHabitModal> {
             Expanded(
               child: Theme(
                 data: ThemeData(
-                    hintColor: theme.h6.color, accentColor: theme.accentColor),
+                  hintColor: theme.h6.color,
+                  //accentColor: theme.accentColor, TODO: accent color?
+                ),
                 child: TextField(
                   autofocus: true,
                   controller: controller,

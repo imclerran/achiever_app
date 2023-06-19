@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -27,21 +27,23 @@ dependencies:
   hydrated_bloc: ^7.1.0
 #  flutter_bloc: ^6.1.1
   flutter_bloc: ^7.3.3
-  path_provider: ^1.6.27
+  path_provider: ^2.0.15
 #  equatable: ^1.2.5
   equatable: ^2.0.3
-  json_annotation: ^3.1.1
+  json_annotation: ">=4.1.0 <4.8.1"
 #  uuid: ^2.2.2
   uuid: ^3.0.5
-  flutter_icons: ^1.1.0
-  gradient_text: ^1.0.2
+#  flutter_icons: ^1.1.0
+  flutter_font_icons: ^2.2.5
+  # gradient_text: ^1.0.2
+  simple_gradient_text: ^1.2.4
   vibration: ^1.7.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner:
-  json_serializable: ^3.5.1
+  json_serializable: ^4.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

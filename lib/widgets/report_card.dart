@@ -1,7 +1,7 @@
 import 'package:achiever_app/data/app_theme.dart';
 import 'package:achiever_app/widgets/progress_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:achiever_app/data/data.dart';
 
 class ReportCard extends StatefulWidget {

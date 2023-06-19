@@ -1,7 +1,7 @@
 import 'package:achiever_app/data/app_theme.dart';
 import 'package:achiever_app/widgets/new_habit_modal.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
 
 class NewHabitCard extends StatelessWidget {
   @override
@@ -63,7 +63,7 @@ class NewHabitCard extends StatelessWidget {
 }
 
 _showModalBottomSheet(BuildContext context) {
-  var theme = AppTheme(MediaQuery.platformBrightnessOf(context));
+  //var theme = AppTheme(MediaQuery.platformBrightnessOf(context));
   showModalBottomSheet(
     context: context,
     backgroundColor: Colors.transparent,
@@ -86,7 +86,10 @@ Widget _buildModalTitleRow(AppTheme theme) {
           Expanded(
             child: Theme(
               data: ThemeData(
-                  hintColor: theme.h6.color, accentColor: theme.accentColor),
+                hintColor: theme.h6.color,
+                //accentColor: theme.accentColor,
+                // TODO: Figure out what purpose accent color served, replace with new theme equivalent
+              ),
               child: TextField(
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.text,

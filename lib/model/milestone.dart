@@ -6,14 +6,14 @@ class Milestone {
   DateTime dueDate;
   String title;
   String description;
-  List<Task> tasksTodo;
-  List<Task> tasksDone;
+  List<Task>? tasksTodo;
+  List<Task>? tasksDone;
 
   Milestone({
-    this.isDone,
-    this.dateCompleted,
-    this.dueDate,
-    this.title,
-    this.description,
+    required this.isDone,
+    required this.dateCompleted,
+    required this.dueDate,
+    required this.title,
+    required this.description,
   });
 }

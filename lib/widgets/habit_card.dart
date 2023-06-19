@@ -3,7 +3,7 @@ import 'package:achiever_app/data/app_theme.dart';
 import 'package:achiever_app/model/habit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:vibration/vibration.dart';
 
 import 'edit_habit_modal.dart';
@@ -11,7 +11,7 @@ import 'edit_habit_modal.dart';
 class HabitCard extends StatelessWidget {
   final Habit habit;
 
-  const HabitCard({Key key, this.habit}) : super(key: key);
+  const HabitCard({Key? key, required this.habit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,9 @@ class HabitCard extends StatelessWidget {
         habitsBloc.add(ToggleHabitDoneToday(habit));
       },
       onLongPress: () async {
-        if (await Vibration.hasAmplitudeControl()) {
+        bool hasAmplitudeControl =
+            await Vibration.hasAmplitudeControl() ?? false;
+        if (hasAmplitudeControl) {
           Vibration.vibrate(amplitude: 255, duration: 10);
         }
         showModalBottomSheet(

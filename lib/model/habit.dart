@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:uuid/uuid.dart';
@@ -16,7 +14,7 @@ class Habit extends Equatable with Comparable {
   }
 
   Habit({
-    String id,
+    String? id,
     this.title = "",
     this.doneDays = const [false, false, false, false, false, false, false],
   }) : this.id = id ?? Uuid().v4();
@@ -43,12 +41,12 @@ class Habit extends Equatable with Comparable {
     };
   }
 
-  factory Habit.fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
-    return Habit(
-      id: json['id'],
-      title: json['title'],
-      doneDays: List<bool>.from(json['doneDays']),
-    );
-  }
+  // factory Habit.fromJson(Map<String, dynamic> json) {
+  //   if (json == null) return null;
+  //   return Habit(
+  //     id: json['id'],
+  //     title: json['title'],
+  //     doneDays: List<bool>.from(json['doneDays']),
+  //   );
+  // }
 }
