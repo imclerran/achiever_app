@@ -25,17 +25,12 @@ dependencies:
     sdk: flutter
 #  hydrated_bloc: ^6.1.0
   hydrated_bloc: ^7.1.0
-#  flutter_bloc: ^6.1.1
   flutter_bloc: ^7.3.3
   path_provider: ^2.0.15
-#  equatable: ^1.2.5
   equatable: ^2.0.3
   json_annotation: ">=4.1.0 <4.8.1"
-#  uuid: ^2.2.2
   uuid: ^3.0.5
-#  flutter_icons: ^1.1.0
   flutter_font_icons: ^2.2.5
-  # gradient_text: ^1.0.2
   simple_gradient_text: ^1.2.4
   vibration: ^1.7.3
 
