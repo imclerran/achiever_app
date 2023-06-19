@@ -63,7 +63,7 @@ class NewHabitCard extends StatelessWidget {
 }
 
 _showModalBottomSheet(BuildContext context) {
-  var theme = AppTheme(MediaQuery.platformBrightnessOf(context));
+  //var theme = AppTheme(MediaQuery.platformBrightnessOf(context));
   showModalBottomSheet(
     context: context,
     backgroundColor: Colors.transparent,
