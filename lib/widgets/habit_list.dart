@@ -14,7 +14,8 @@ class HabitList extends StatefulWidget {
 
 class _HabitListState extends State<HabitList> {
   //var habitsBloc = HabitsBloc()..add(LoadHabits());
-  List<Habit> habits;
+  //List<Habit> habits; // TODO: verify list in widget state is unneeded
+  // TODO: if possible, convert habit list to stateless widget
 
   @override
   Widget build(BuildContext context) {
