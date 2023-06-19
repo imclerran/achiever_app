@@ -110,26 +110,26 @@ class HabitsBloc extends Bloc<HabitsEvent, HabitsState> {
     }
   }
 
-  @override
-  HabitsLoaded? fromJson(Map<String, dynamic> json) {
-    try {
-      final List<Habit> habits = (json["habits"] as Map<String, dynamic>)
-          .values
-          .map((e) => Habit.fromJson(e))
-          .toList();
-      return HabitsLoaded(habits);
-    } catch (_) {
-      return null;
-    }
-  }
+  // @override
+  // HabitsLoaded? fromJson(Map<String, dynamic> json) {
+  //   try {
+  //     final List<Habit> habits = (json["habits"] as Map<String, dynamic>)
+  //         .values
+  //         .map((e) => Habit.fromJson(e))
+  //         .toList();
+  //     return HabitsLoaded(habits);
+  //   } catch (_) {
+  //     return null;
+  //   }
+  // }
 
-  @override
-  Map<String, dynamic>? toJson(HabitsState state) {
-    if (state is HabitsLoaded) {
-      return {
-        "habits": state.habits.map((habit) => habit.toJson()).toList(),
-      };
-    }
-    return null;
-  }
+  // @override
+  // Map<String, dynamic>? toJson(HabitsState state) {
+  //   if (state is HabitsLoaded) {
+  //     return {
+  //       "habits": state.habits.map((habit) => habit.toJson()).toList(),
+  //     };
+  //   }
+  //   return null;
+  // }
 }
