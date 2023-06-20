@@ -37,8 +37,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner:
-  json_serializable: ^4.1.0
+  build_runner: ">=2.0.0 <3.0.0"
+#  json_serializable: ^4.1.0
+  mockito: ^5.4.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
