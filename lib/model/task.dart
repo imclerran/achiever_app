@@ -115,8 +115,6 @@ class Task extends Equatable {
       today = DateTime(today.year, today.month, today.day, 0, 0, 0);
       if (dueDate!.isAfter(today) &&
           dueDate!.isBefore(today.add(Duration(days: 7)))) {
-        // TODO: should be `Duration(days: 8)`? since `isBefore.
-        // TODO: Write unit tests
         if (1 == dueDate!.weekday) return "Monday";
         if (2 == dueDate!.weekday) return "Tuesday";
         if (3 == dueDate!.weekday) return "Wednesday";
