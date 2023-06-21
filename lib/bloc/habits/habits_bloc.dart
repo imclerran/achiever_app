@@ -6,7 +6,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 part 'habits_event.dart';
 part 'habits_state.dart';
 
-class HabitsBloc extends Bloc<HabitsEvent, HabitsState> {
+class HabitsBloc extends HydratedBloc<HabitsEvent, HabitsState> {
   HabitsBloc() : super(HabitsInitial()) {
     on<LoadHabits>(_onLoadHabits);
     on<AddHabit>(_onAddHabit);
@@ -81,5 +81,17 @@ class HabitsBloc extends Bloc<HabitsEvent, HabitsState> {
       }).toList();
       emit(HabitsLoaded(updatedList));
     }
+  }
+
+  @override
+  HabitsState? fromJson(Map<String, dynamic> json) {
+    // TODO: implement fromJson
+    throw UnimplementedError();
+  }
+
+  @override
+  Map<String, dynamic>? toJson(HabitsState state) {
+    // TODO: implement toJson
+    throw UnimplementedError();
   }
 }
