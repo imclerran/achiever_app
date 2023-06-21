@@ -21,14 +21,14 @@ class UpdateTask extends TasksEvent {
   get props => [task];
 }
 
-class ToggleTaskDone extends TasksEvent {
-  final Task task;
-  ToggleTaskDone(this.task);
-  get props => [task];
-}
-
 class DeleteTask extends TasksEvent {
   final Task task;
   DeleteTask(this.task);
+  get props => [task];
+}
+
+class ToggleTaskDone extends TasksEvent {
+  final Task task;
+  ToggleTaskDone(this.task);
   get props => [task];
 }
