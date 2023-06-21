@@ -33,6 +33,9 @@ class Habit extends Equatable with Comparable {
     return -1;
   }
 
+  // TODO: check to and from json methods to ensure proper (de)serialization
+  // TODO: write unit tests
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -41,12 +44,11 @@ class Habit extends Equatable with Comparable {
     };
   }
 
-  // factory Habit.fromJson(Map<String, dynamic> json) {
-  //   if (json == null) return null;
-  //   return Habit(
-  //     id: json['id'],
-  //     title: json['title'],
-  //     doneDays: List<bool>.from(json['doneDays']),
-  //   );
-  // }
+  factory Habit.fromJson(Map<String, dynamic> json) {
+    return Habit(
+      id: json['id'],
+      title: json['title'],
+      doneDays: List<bool>.from(json['doneDays']),
+    );
+  }
 }
