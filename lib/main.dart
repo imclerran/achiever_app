@@ -1,5 +1,6 @@
 import 'package:achiever_app/screens/home_screen.dart';
 import 'package:achiever_app/data/app_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,12 +11,11 @@ import 'bloc/habits/habits_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var storage = HydratedStorage.build(
-    storageDirectory: await getApplicationDocumentsDirectory(),
+    storageDirectory: kIsWeb
+        ? HydratedStorage.webStorageDirectory
+        : await getApplicationDocumentsDirectory(),
   );
   HydratedBloc.storage = await storage;
-  // = await HydratedStorage.build(
-  //   storageDirectory: await getApplicationDocumentsDirectory(),
-  // );
   storage.whenComplete(() {
     runApp(AchieverApp());
   });
