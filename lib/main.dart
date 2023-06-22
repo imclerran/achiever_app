@@ -40,10 +40,13 @@ class _AchieverAppState extends State<AchieverApp> {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HabitsBloc>(create: (BuildContext context) => habitsBloc),
+        BlocProvider<HabitsBloc>(
+          //create: (BuildContext context) => habitsBloc,
+          create: (_) => habitsBloc,
+        ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Achiever',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             // hintColor: theme.h4.color,

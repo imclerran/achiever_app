@@ -7,14 +7,14 @@ abstract class HabitsState extends Equatable {
   List<Object> get props => [];
 }
 
-class HabitsInitial extends HabitsState {}
-
-class HabitsLoading extends HabitsState {}
+class HabitsInitial extends HabitsState {
+  final List<Habit> habits;
+  HabitsInitial() : habits = data.habits;
+  get props => [habits];
+}
 
 class HabitsLoaded extends HabitsState {
   final List<Habit> habits;
   HabitsLoaded(this.habits);
   get props => [habits];
 }
-
-class HabitsNotLoaded extends HabitsState {}

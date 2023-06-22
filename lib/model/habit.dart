@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -41,7 +40,4 @@ class Habit extends Equatable with Comparable {
   factory Habit.fromJson(Map<String, dynamic> json) => _$HabitFromJson(json);
 
   Map<String, dynamic> toJson() => _$HabitToJson(this);
-
-  // TODO: check to and from json methods to ensure proper (de)serialization
-  // TODO: write unit tests
 }

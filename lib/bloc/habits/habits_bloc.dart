@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:achiever_app/data/data.dart';
 import 'package:achiever_app/model/habit.dart';
 import 'package:equatable/equatable.dart';
@@ -17,7 +19,9 @@ class HabitsBloc extends HydratedBloc<HabitsEvent, HabitsState> {
   }
 
   void _onLoadHabits(LoadHabits event, Emitter<HabitsState> emit) {
-    emit(HabitsLoaded(data.habits));
+    Map<String, dynamic> habitsJson = HydratedBloc.storage.read("HabitsBloc");
+    HabitsLoaded habitsState = fromJson(habitsJson) as HabitsLoaded;
+    emit(habitsState);
   }
 
   void _onAddHabit(AddHabit event, Emitter<HabitsState> emit) {
@@ -85,13 +89,24 @@ class HabitsBloc extends HydratedBloc<HabitsEvent, HabitsState> {
 
   @override
   HabitsState? fromJson(Map<String, dynamic> json) {
-    // TODO: implement fromJson
-    throw UnimplementedError();
+    List<dynamic> habitsJson = jsonDecode(json['habits']);
+    List<Habit> habits = List.empty(growable: true);
+    for (Map<String, dynamic> habitJson in habitsJson) {
+      habits.add(Habit.fromJson(habitJson));
+    }
+    return HabitsLoaded(habits);
   }
 
   @override
   Map<String, dynamic>? toJson(HabitsState state) {
-    // TODO: implement toJson
-    throw UnimplementedError();
+    if (state is HabitsLoaded) {
+      String habitsJson = jsonEncode(state.habits);
+      return {"habits": habitsJson};
+    } else if (state is HabitsInitial) {
+      String habitsJson = jsonEncode(state.habits);
+      return {"habits": habitsJson};
+    } else {
+      return {"habits": "[]"};
+    }
   }
 }
