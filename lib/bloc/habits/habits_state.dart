@@ -17,10 +17,4 @@ class HabitsLoaded extends HabitsState {
   get props => [habits];
 }
 
-class HabitsUpdated extends HabitsLoaded {
-  final Habit updated;
-  HabitsUpdated(List<Habit> habits, this.updated) : super(habits);
-  get props => [habits, updated];
-}
-
 class HabitsNotLoaded extends HabitsState {}
