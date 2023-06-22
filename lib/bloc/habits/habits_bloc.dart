@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:convert';
 
 import 'package:achiever_app/data/data.dart';
 import 'package:achiever_app/model/habit.dart';
@@ -8,62 +8,51 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 part 'habits_event.dart';
 part 'habits_state.dart';
 
-class HabitsBloc extends Bloc<HabitsEvent, HabitsState> {
-  HabitsBloc() : super(HabitsInitial());
-
-  //HabitsState get initialState => HabitsInitial();
-
-  @override
-  Stream<HabitsState> mapEventToState(
-    HabitsEvent event,
-  ) async* {
-    if (event is LoadHabits) {
-      yield* _mapLoadHabitsToState(event);
-    }
-    if (event is AddHabit) {
-      yield* _mapAddHabitToState(event);
-    }
-    if (event is UpdateHabit) {
-      yield* _mapUpdateHabitToState(event);
-    }
-    if (event is ToggleHabitDoneToday) {
-      yield* _mapToggleHabitToState(event);
-    }
-    if (event is DeleteHabit) {
-      yield* _mapDeleteHabitToState(event);
-    }
-    if (event is ResetAllHabits) {
-      yield* _mapResetAllHabitsToState(event);
-    }
+class HabitsBloc extends HydratedBloc<HabitsEvent, HabitsState> {
+  HabitsBloc() : super(HabitsInitial()) {
+    on<LoadHabits>(_onLoadHabits);
+    on<AddHabit>(_onAddHabit);
+    on<DeleteHabit>(_onDeleteHabit);
+    on<UpdateHabit>(_onUpdateHabit);
+    on<ResetAllHabits>(_onResetAllHabits);
+    on<ToggleHabitDoneToday>(_onToggleHabit);
   }
 
-  Stream<HabitsState> _mapAddHabitToState(AddHabit event) async* {
+  void _onLoadHabits(LoadHabits event, Emitter<HabitsState> emit) {
+    Map<String, dynamic> habitsJson = HydratedBloc.storage.read("HabitsBloc");
+    HabitsLoaded habitsState = fromJson(habitsJson) as HabitsLoaded;
+    emit(habitsState);
+  }
+
+  void _onAddHabit(AddHabit event, Emitter<HabitsState> emit) {
     if (state is HabitsLoaded) {
       List<Habit> updatedList = List.from((state as HabitsLoaded).habits)
         ..add(event.habit);
-      yield HabitsLoaded(updatedList);
+      emit(HabitsLoaded(updatedList));
     }
   }
 
-  Stream<HabitsState> _mapDeleteHabitToState(DeleteHabit event) async* {
+  void _onDeleteHabit(DeleteHabit event, Emitter<HabitsState> emit) {
     if (state is HabitsLoaded) {
       final List<Habit> updatedList = (state as HabitsLoaded)
           .habits
           .where((habit) => habit.id != event.habit.id)
           .toList();
-      yield HabitsLoaded(updatedList);
+      emit(HabitsLoaded(updatedList));
     }
   }
 
-  Stream<HabitsState> _mapLoadHabitsToState(LoadHabits event) async* {
-    if (state is HabitsNotLoaded || state is HabitsInitial) {
-      yield HabitsLoading();
-      yield HabitsLoaded(data.habits);
-      //yield HabitsLoaded([]);
+  void _onUpdateHabit(UpdateHabit event, Emitter<HabitsState> emit) {
+    if (state is HabitsLoaded) {
+      final List<Habit> updatedList =
+          (state as HabitsLoaded).habits.map((habit) {
+        return habit.id == event.habit.id ? event.habit : habit;
+      }).toList();
+      emit(HabitsLoaded(updatedList));
     }
   }
 
-  Stream<HabitsState> _mapResetAllHabitsToState(ResetAllHabits event) async* {
+  void _onResetAllHabits(ResetAllHabits event, Emitter<HabitsState> emit) {
     if (state is HabitsLoaded) {
       final List<Habit> updatedHabits = (state as HabitsLoaded)
           .habits
@@ -75,13 +64,11 @@ class HabitsBloc extends Bloc<HabitsEvent, HabitsState> {
             ),
           )
           .toList();
-      yield HabitsLoaded(updatedHabits);
+      emit(HabitsLoaded(updatedHabits));
     }
   }
 
-  Stream<HabitsState> _mapToggleHabitToState(
-    ToggleHabitDoneToday event,
-  ) async* {
+  void _onToggleHabit(ToggleHabitDoneToday event, Emitter<HabitsState> emit) {
     if (state is HabitsLoaded) {
       bool status = event.habit.isDoneToday;
       var weekday = DateTime.now().weekday;
@@ -96,40 +83,30 @@ class HabitsBloc extends Bloc<HabitsEvent, HabitsState> {
           (state as HabitsLoaded).habits.map((habit) {
         return habit.id == updatedHabit.id ? updatedHabit : habit;
       }).toList();
-      yield HabitsLoaded(updatedList);
+      emit(HabitsLoaded(updatedList));
     }
   }
 
-  Stream<HabitsState> _mapUpdateHabitToState(UpdateHabit event) async* {
+  @override
+  HabitsState? fromJson(Map<String, dynamic> json) {
+    List<dynamic> habitsJson = jsonDecode(json['habits']);
+    List<Habit> habits = List.empty(growable: true);
+    for (Map<String, dynamic> habitJson in habitsJson) {
+      habits.add(Habit.fromJson(habitJson));
+    }
+    return HabitsLoaded(habits);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(HabitsState state) {
     if (state is HabitsLoaded) {
-      final List<Habit> updatedList =
-          (state as HabitsLoaded).habits.map((habit) {
-        return habit.id == event.habit.id ? event.habit : habit;
-      }).toList();
-      yield HabitsLoaded(updatedList);
+      String habitsJson = jsonEncode(state.habits);
+      return {"habits": habitsJson};
+    } else if (state is HabitsInitial) {
+      String habitsJson = jsonEncode(state.habits);
+      return {"habits": habitsJson};
+    } else {
+      return {"habits": "[]"};
     }
   }
-
-  // @override
-  // HabitsLoaded? fromJson(Map<String, dynamic> json) {
-  //   try {
-  //     final List<Habit> habits = (json["habits"] as Map<String, dynamic>)
-  //         .values
-  //         .map((e) => Habit.fromJson(e))
-  //         .toList();
-  //     return HabitsLoaded(habits);
-  //   } catch (_) {
-  //     return null;
-  //   }
-  // }
-
-  // @override
-  // Map<String, dynamic>? toJson(HabitsState state) {
-  //   if (state is HabitsLoaded) {
-  //     return {
-  //       "habits": state.habits.map((habit) => habit.toJson()).toList(),
-  //     };
-  //   }
-  //   return null;
-  // }
 }

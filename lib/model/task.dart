@@ -1,11 +1,17 @@
 import 'package:achiever_app/constants/enums.dart';
 import 'package:achiever_app/model/subtask.dart';
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
+import 'package:uuid/uuid.dart';
+
+part 'task.g.dart';
 
 @immutable
+@JsonSerializable()
 class Task extends Equatable {
   // TODO: need id property
+  final String id;
   final bool isDone;
   final DateTime? dateCompleted;
   final DateTime? dueDate;
@@ -15,6 +21,7 @@ class Task extends Equatable {
   final TaskPriority priority;
 
   Task({
+    String? id,
     this.isDone = false,
     this.dateCompleted,
     this.dueDate,
@@ -22,7 +29,7 @@ class Task extends Equatable {
     this.description = "",
     this.priority = TaskPriority.none,
     this.subtasks = const [],
-  });
+  }) : this.id = id ?? Uuid().v4();
 
   int compareByDueDate(Task other) {
     if (null == this.dueDate) {
@@ -144,4 +151,8 @@ class Task extends Equatable {
   @override
   List<Object?> get props =>
       [isDone, dateCompleted, dueDate, title, description, subtasks, priority];
+
+  factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TaskToJson(this);
 }

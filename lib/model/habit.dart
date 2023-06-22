@@ -1,8 +1,12 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:uuid/uuid.dart';
 
+part 'habit.g.dart';
+
 @immutable
+@JsonSerializable()
 class Habit extends Equatable with Comparable {
   final String id;
   final String title;
@@ -33,20 +37,7 @@ class Habit extends Equatable with Comparable {
     return -1;
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'doneDays': doneDays,
-    };
-  }
+  factory Habit.fromJson(Map<String, dynamic> json) => _$HabitFromJson(json);
 
-  // factory Habit.fromJson(Map<String, dynamic> json) {
-  //   if (json == null) return null;
-  //   return Habit(
-  //     id: json['id'],
-  //     title: json['title'],
-  //     doneDays: List<bool>.from(json['doneDays']),
-  //   );
-  // }
+  Map<String, dynamic> toJson() => _$HabitToJson(this);
 }
