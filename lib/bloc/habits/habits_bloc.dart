@@ -25,29 +25,25 @@ class HabitsBloc extends HydratedBloc<HabitsEvent, HabitsState> {
   }
 
   void _onAddHabit(AddHabit event, Emitter<HabitsState> emit) {
-    List<Habit> updatedList = List.from((state as HabitsLoaded).habits)
-      ..add(event.habit);
+    List<Habit> updatedList = List.from(state.habits)..add(event.habit);
     emit(HabitsLoaded(updatedList));
   }
 
   void _onDeleteHabit(DeleteHabit event, Emitter<HabitsState> emit) {
-    final List<Habit> updatedList = (state as HabitsLoaded)
-        .habits
-        .where((habit) => habit.id != event.habit.id)
-        .toList();
+    final List<Habit> updatedList =
+        state.habits.where((habit) => habit.id != event.habit.id).toList();
     emit(HabitsLoaded(updatedList));
   }
 
   void _onUpdateHabit(UpdateHabit event, Emitter<HabitsState> emit) {
-    final List<Habit> updatedList = (state as HabitsLoaded).habits.map((habit) {
-      return habit.id == event.habit.id ? event.habit : habit;
-    }).toList();
+    final List<Habit> updatedList = state.habits
+        .map((habit) => habit.id == event.habit.id ? event.habit : habit)
+        .toList();
     emit(HabitsLoaded(updatedList));
   }
 
   void _onResetAllHabits(ResetAllHabits event, Emitter<HabitsState> emit) {
-    final List<Habit> updatedHabits = (state as HabitsLoaded)
-        .habits
+    final List<Habit> updatedHabits = state.habits
         .map(
           (habit) => Habit(
             id: habit.id,
@@ -69,7 +65,7 @@ class HabitsBloc extends HydratedBloc<HabitsEvent, HabitsState> {
       title: event.habit.title,
       doneDays: doneDays,
     );
-    final List<Habit> updatedList = (state as HabitsLoaded).habits.map((habit) {
+    final List<Habit> updatedList = state.habits.map((habit) {
       return habit.id == updatedHabit.id ? updatedHabit : habit;
     }).toList();
     emit(HabitsLoaded(updatedList));
@@ -87,14 +83,7 @@ class HabitsBloc extends HydratedBloc<HabitsEvent, HabitsState> {
 
   @override
   Map<String, dynamic>? toJson(HabitsState state) {
-    if (state is HabitsLoaded) {
-      String habitsJson = jsonEncode(state.habits);
-      return {'habits': habitsJson};
-    } else if (state is HabitsInitial) {
-      String habitsJson = jsonEncode(state.habits);
-      return {'habits': habitsJson};
-    } else {
-      return {'habits': '[]'};
-    }
+    String habitsJson = jsonEncode(state.habits);
+    return {'habits': habitsJson};
   }
 }
