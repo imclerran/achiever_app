@@ -25,66 +25,54 @@ class HabitsBloc extends HydratedBloc<HabitsEvent, HabitsState> {
   }
 
   void _onAddHabit(AddHabit event, Emitter<HabitsState> emit) {
-    if (state is HabitsLoaded) {
-      List<Habit> updatedList = List.from((state as HabitsLoaded).habits)
-        ..add(event.habit);
-      emit(HabitsLoaded(updatedList));
-    }
+    List<Habit> updatedList = List.from((state as HabitsLoaded).habits)
+      ..add(event.habit);
+    emit(HabitsLoaded(updatedList));
   }
 
   void _onDeleteHabit(DeleteHabit event, Emitter<HabitsState> emit) {
-    if (state is HabitsLoaded) {
-      final List<Habit> updatedList = (state as HabitsLoaded)
-          .habits
-          .where((habit) => habit.id != event.habit.id)
-          .toList();
-      emit(HabitsLoaded(updatedList));
-    }
+    final List<Habit> updatedList = (state as HabitsLoaded)
+        .habits
+        .where((habit) => habit.id != event.habit.id)
+        .toList();
+    emit(HabitsLoaded(updatedList));
   }
 
   void _onUpdateHabit(UpdateHabit event, Emitter<HabitsState> emit) {
-    if (state is HabitsLoaded) {
-      final List<Habit> updatedList =
-          (state as HabitsLoaded).habits.map((habit) {
-        return habit.id == event.habit.id ? event.habit : habit;
-      }).toList();
-      emit(HabitsLoaded(updatedList));
-    }
+    final List<Habit> updatedList = (state as HabitsLoaded).habits.map((habit) {
+      return habit.id == event.habit.id ? event.habit : habit;
+    }).toList();
+    emit(HabitsLoaded(updatedList));
   }
 
   void _onResetAllHabits(ResetAllHabits event, Emitter<HabitsState> emit) {
-    if (state is HabitsLoaded) {
-      final List<Habit> updatedHabits = (state as HabitsLoaded)
-          .habits
-          .map(
-            (habit) => Habit(
-              id: habit.id,
-              title: habit.title,
-              doneDays: [false, false, false, false, false, false, false],
-            ),
-          )
-          .toList();
-      emit(HabitsLoaded(updatedHabits));
-    }
+    final List<Habit> updatedHabits = (state as HabitsLoaded)
+        .habits
+        .map(
+          (habit) => Habit(
+            id: habit.id,
+            title: habit.title,
+            doneDays: [false, false, false, false, false, false, false],
+          ),
+        )
+        .toList();
+    emit(HabitsLoaded(updatedHabits));
   }
 
   void _onToggleHabit(ToggleHabitDoneToday event, Emitter<HabitsState> emit) {
-    if (state is HabitsLoaded) {
-      bool status = event.habit.isDoneToday;
-      var weekday = DateTime.now().weekday;
-      List<bool> doneDays = List.from(event.habit.doneDays);
-      doneDays[weekday - 1] = !status;
-      var updatedHabit = Habit(
-        id: event.habit.id,
-        title: event.habit.title,
-        doneDays: doneDays,
-      );
-      final List<Habit> updatedList =
-          (state as HabitsLoaded).habits.map((habit) {
-        return habit.id == updatedHabit.id ? updatedHabit : habit;
-      }).toList();
-      emit(HabitsLoaded(updatedList));
-    }
+    bool status = event.habit.isDoneToday;
+    var weekday = DateTime.now().weekday;
+    List<bool> doneDays = List.from(event.habit.doneDays);
+    doneDays[weekday - 1] = !status;
+    var updatedHabit = Habit(
+      id: event.habit.id,
+      title: event.habit.title,
+      doneDays: doneDays,
+    );
+    final List<Habit> updatedList = (state as HabitsLoaded).habits.map((habit) {
+      return habit.id == updatedHabit.id ? updatedHabit : habit;
+    }).toList();
+    emit(HabitsLoaded(updatedList));
   }
 
   @override
