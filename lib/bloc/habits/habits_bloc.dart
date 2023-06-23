@@ -19,7 +19,7 @@ class HabitsBloc extends HydratedBloc<HabitsEvent, HabitsState> {
   }
 
   void _onLoadHabits(LoadHabits event, Emitter<HabitsState> emit) {
-    Map<String, dynamic> habitsJson = HydratedBloc.storage.read("HabitsBloc");
+    Map<String, dynamic> habitsJson = HydratedBloc.storage.read('HabitsBloc');
     HabitsLoaded habitsState = fromJson(habitsJson) as HabitsLoaded;
     emit(habitsState);
   }
@@ -101,12 +101,12 @@ class HabitsBloc extends HydratedBloc<HabitsEvent, HabitsState> {
   Map<String, dynamic>? toJson(HabitsState state) {
     if (state is HabitsLoaded) {
       String habitsJson = jsonEncode(state.habits);
-      return {"habits": habitsJson};
+      return {'habits': habitsJson};
     } else if (state is HabitsInitial) {
       String habitsJson = jsonEncode(state.habits);
-      return {"habits": habitsJson};
+      return {'habits': habitsJson};
     } else {
-      return {"habits": "[]"};
+      return {'habits': '[]'};
     }
   }
 }
