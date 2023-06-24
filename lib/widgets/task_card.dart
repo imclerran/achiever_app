@@ -133,6 +133,7 @@ class TaskCard extends StatelessWidget {
                   children: [
                     CustomCheckbox(
                       onPressed: () {
+                        // TODO: troubleshoot task.isDone state not persisting between app launches
                         var tasksBloc = BlocProvider.of<TasksBloc>(context);
                         tasksBloc.add(ToggleTaskDone(task));
                       },
