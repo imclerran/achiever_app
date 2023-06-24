@@ -3,7 +3,9 @@ import 'package:achiever_app/data/app_theme.dart';
 import 'package:achiever_app/model/task.dart';
 import 'package:achiever_app/widgets/progress_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/tasks/tasks_bloc.dart';
 import 'custom_checkbox.dart';
 
 class TaskCard extends StatelessWidget {
@@ -130,7 +132,11 @@ class TaskCard extends StatelessWidget {
                 child: Row(
                   children: [
                     CustomCheckbox(
-                      onPressed: () => {},
+                      onPressed: () {
+                        // TODO: troubleshoot task.isDone state not persisting between app launches
+                        var tasksBloc = BlocProvider.of<TasksBloc>(context);
+                        tasksBloc.add(ToggleTaskDone(task));
+                      },
                       defaultState: task.isDone, // TODO: default to done?
                       borderColor: AppThemeLight.accentColor,
                       checkedColor: Colors.transparent,

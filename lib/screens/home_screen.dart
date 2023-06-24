@@ -4,11 +4,13 @@ import 'package:achiever_app/widgets/report_card.dart';
 import 'package:achiever_app/widgets/task_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:gradient_text/gradient_text.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
-import 'package:achiever_app/data/data.dart';
+//import 'package:achiever_app/data/data.dart';
 import 'package:achiever_app/data/app_theme.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
+
+import '../bloc/tasks/tasks_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,8 +18,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Task> tasksDueThisWeek = data.tasksDueThisWeekOrUndated;
-  List<Task> tasksDueAfterThisWeek = data.tasksDueAfterThisWeek;
+  List<Task> tasksDueThisWeek = [];
+  List<Task> tasksDueAfterThisWeek = [];
 
   @override
   Widget build(BuildContext context) {
@@ -29,61 +31,74 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
     return Scaffold(
       backgroundColor: theme.backgroundColor,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: theme.primaryColor,
-            forceElevated: true,
-            floating: true,
-            elevation: 4,
-            //brightness: theme.brightness, TODO: update theme to latest theme conventions
-            flexibleSpace: FlexibleSpaceBar(
-              title: GradientText(
-                "Achiever",
-                colors: [AppThemeLight.accentColor, AppThemeLight.accentColor2],
-                // gradient: LinearGradient(colors: [
-                //   AppThemeLight.accentColor,
-                //   AppThemeLight.accentColor2
-                // ]), TODO: verify new gradient text is working correctly
-                style: TextStyle(
-                  fontSize: 32.0,
-                  color: AppThemeLight.accentColor,
-                ),
-              ),
-              centerTitle: true,
-              titlePadding: EdgeInsets.all(8.0),
-            ),
-            actions: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: TextButton(
-                  /*FlatButton(*/
-                  onPressed: () {},
-                  child: Row(
-                    children: [
-                      Icon(
-                        FontAwesome.plus,
-                        color: AppThemeLight.accentColor,
-                        size: 22.0,
-                      ),
-                      SizedBox(width: 4),
-                      Text(
-                        "New",
-                        style: AppThemeLight.h3,
-                      ),
+      body: BlocBuilder(
+        bloc: BlocProvider.of<TasksBloc>(context),
+        builder: (context, state) {
+          if (state is TasksLoaded) {
+            tasksDueThisWeek =
+                state.tasks.where((task) => task.isDueThisWeek).toList();
+            tasksDueAfterThisWeek = state.tasks
+                .where((task) => task.isDueAfterThisWeekOrUndated)
+                .toList();
+          } else {
+            tasksDueThisWeek = [];
+            tasksDueAfterThisWeek = [];
+          }
+          return CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                backgroundColor: theme.primaryColor,
+                forceElevated: true,
+                floating: true,
+                elevation: 4,
+                //brightness: theme.brightness, TODO: update theme to latest theme conventions
+                flexibleSpace: FlexibleSpaceBar(
+                  title: GradientText(
+                    "Achiever",
+                    colors: [
+                      AppThemeLight.accentColor,
+                      AppThemeLight.accentColor2
                     ],
+                    style: TextStyle(
+                      fontSize: 32.0,
+                      color: AppThemeLight.accentColor,
+                    ),
                   ),
+                  centerTitle: true,
+                  titlePadding: EdgeInsets.all(8.0),
+                ),
+                actions: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          Icon(
+                            FontAwesome.plus,
+                            color: AppThemeLight.accentColor,
+                            size: 22.0,
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            "New",
+                            style: AppThemeLight.h3,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  _homescreenSliverBuilder,
+                  childCount: sliverListCount,
                 ),
               ),
             ],
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              _homescreenSliverBuilder,
-              childCount: sliverListCount,
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
@@ -91,15 +106,16 @@ class _HomeScreenState extends State<HomeScreen> {
   String _getGreeting() {
     var hourNow = DateTime.now().hour;
     if (hourNow < 12) return "Good Morning!";
-    if (hourNow < 17) return "Good Afternoon!";
+    if (hourNow < 18) return "Good Afternoon!";
     return "Good Evening!";
   }
 
   int get sliverListOffsetThisWeek => 4;
 
   int get sliverListOffsetAfterThisWeek {
+    int numExtraSlivers = 4;
     int numDueThisWeek = tasksDueThisWeek.length;
-    return 4 + (numDueThisWeek > 0 ? numDueThisWeek : 1);
+    return numExtraSlivers + (numDueThisWeek > 0 ? numDueThisWeek : 1);
   }
 
   int get sliverListCount {

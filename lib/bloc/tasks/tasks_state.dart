@@ -1,26 +1,21 @@
 part of 'tasks_bloc.dart';
 
 abstract class TasksState extends Equatable {
-  const TasksState();
+  final List<Task> tasks;
+  const TasksState() : tasks = const [];
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [tasks];
 }
 
-class TasksInitial extends TasksState {}
-
-class TasksLoading extends TasksState {}
+class TasksInitial extends TasksState {
+  final List<Task> tasks;
+  TasksInitial() : tasks = data.tasks;
+  get props => [tasks];
+}
 
 class TasksLoaded extends TasksState {
   final List<Task> tasks;
   TasksLoaded(this.tasks);
   get props => [tasks];
 }
-
-class TaskUpdated extends TasksLoaded {
-  final Task updated;
-  TaskUpdated(List<Task> tasks, this.updated) : super(tasks);
-  get props => [tasks, updated];
-}
-
-class TasksNotLoaded extends TasksState {}

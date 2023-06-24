@@ -36,8 +36,7 @@ final today = DateTime.now();
 final data = Data(
   habits: [
     Habit(title: "Brush your teeth"),
-    Habit(title: "Do some programming"),
-    Habit(title: "Read your bible"),
+    Habit(title: "Read a book"),
   ],
   tasks: [
     Task(

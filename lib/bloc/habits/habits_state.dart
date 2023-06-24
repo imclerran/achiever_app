@@ -1,10 +1,11 @@
 part of 'habits_bloc.dart';
 
 abstract class HabitsState extends Equatable {
-  const HabitsState();
+  final List<Habit> habits;
+  const HabitsState() : habits = const [];
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [habits];
 }
 
 class HabitsInitial extends HabitsState {

@@ -13,8 +13,6 @@ class HabitList extends StatefulWidget {
 }
 
 class _HabitListState extends State<HabitList> {
-  //var habitsBloc = HabitsBloc()..add(LoadHabits());
-  //List<Habit> habits; // TODO: verify list in widget state is unneeded
   // TODO: if possible, convert habit list to stateless widget
 
   @override
@@ -47,8 +45,8 @@ class _HabitListState extends State<HabitList> {
     List<Habit> habitsList = List.from(habits)
       ..sort((Habit lhs, Habit rhs) => lhs.compareTo(rhs));
     List<Widget> habitCards = [
-      for (var habit in habitsList) HabitCard(habit: habit),
       NewHabitCard(),
+      for (var habit in habitsList) HabitCard(habit: habit),
     ];
     return ListView(
       shrinkWrap: true,
