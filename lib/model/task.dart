@@ -10,7 +10,6 @@ part 'task.g.dart';
 @immutable
 @JsonSerializable()
 class Task extends Equatable {
-  // TODO: need id property
   final String id;
   final bool isDone;
   final DateTime? dateCompleted;
@@ -104,6 +103,16 @@ class Task extends Equatable {
 
   bool get isDueAfterThisWeek {
     if (dueDate == null) return false;
+    var today = DateTime.now();
+    int daysToLastWeekday = 7 - today.weekday;
+    var lastDayOfWeek = today.add(Duration(days: daysToLastWeekday));
+    lastDayOfWeek = DateTime(lastDayOfWeek.year, lastDayOfWeek.month,
+        lastDayOfWeek.day, 23, 59, 59, 999);
+    return dueDate!.isAfter(lastDayOfWeek);
+  }
+
+  bool get isDueAfterThisWeekOrUndated {
+    if (dueDate == null) return true;
     var today = DateTime.now();
     int daysToLastWeekday = 7 - today.weekday;
     var lastDayOfWeek = today.add(Duration(days: daysToLastWeekday));
