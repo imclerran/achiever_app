@@ -45,7 +45,7 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
       onTap: () {
         setState(() {
           _isSelected = !_isSelected;
-          //if (null != widget.onPressed) widget.onPressed(_isSelected);
+          widget.onPressed();
         });
       },
       child: AnimatedContainer(
