@@ -158,8 +158,38 @@ class Task extends Equatable {
       subtasks.where((Subtask subtask) => subtask.isDone).length;
 
   @override
-  List<Object?> get props =>
-      [isDone, dateCompleted, dueDate, title, description, subtasks, priority];
+  List<Object?> get props => [
+        id,
+        isDone,
+        dateCompleted,
+        dueDate,
+        title,
+        description,
+        subtasks,
+        priority
+      ];
+
+  factory Task.copyWith(
+    Task task, {
+    String? id,
+    bool? isDone,
+    DateTime? dateCompleted,
+    DateTime? dueDate,
+    String? title,
+    String? description,
+    List<Subtask>? subtasks,
+    TaskPriority? priority,
+  }) =>
+      Task(
+        id: id ?? task.id,
+        isDone: isDone ?? task.isDone,
+        dateCompleted: dateCompleted ?? task.dateCompleted,
+        dueDate: dueDate ?? task.dueDate,
+        title: title ?? task.title,
+        description: description ?? task.description,
+        subtasks: subtasks ?? task.subtasks,
+        priority: priority ?? task.priority,
+      );
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 
