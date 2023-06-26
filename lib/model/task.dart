@@ -181,15 +181,14 @@ class Task extends Equatable {
     TaskPriority? priority,
   }) =>
       Task(
-        id: id ?? task.id,
-        isDone: isDone ?? task.isDone,
-        dateCompleted: dateCompleted ?? task.dateCompleted,
-        dueDate: dueDate ?? task.dueDate,
-        title: title ?? task.title,
-        description: description ?? task.description,
-        subtasks: subtasks ?? task.subtasks,
-        priority: priority ?? task.priority,
-      );
+          id: id ?? task.id,
+          isDone: isDone ?? task.isDone,
+          dateCompleted: dateCompleted ?? task.dateCompleted,
+          dueDate: dueDate ?? task.dueDate,
+          title: title ?? task.title,
+          description: description ?? task.description,
+          subtasks: subtasks ?? task.subtasks,
+          priority: priority ?? task.priority);
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 

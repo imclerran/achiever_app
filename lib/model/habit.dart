@@ -37,6 +37,17 @@ class Habit extends Equatable with Comparable {
     return -1;
   }
 
+  // final String id;
+  // final String title;
+  // final List<bool> doneDays;
+
+  factory Habit.copyWith(Habit habit,
+          {String? id, String? title, List<bool>? doneDays}) =>
+      Habit(
+          id: id ?? habit.id,
+          title: title ?? habit.title,
+          doneDays: doneDays ?? habit.doneDays);
+
   factory Habit.fromJson(Map<String, dynamic> json) => _$HabitFromJson(json);
 
   Map<String, dynamic> toJson() => _$HabitToJson(this);
