@@ -1,5 +1,5 @@
 import 'package:achiever_app/model/task.dart';
-import 'package:achiever_app/widgets/habit_list.dart';
+import 'package:achiever_app/widgets/habit/habit_list.dart';
 import 'package:achiever_app/widgets/report_card.dart';
 import 'package:achiever_app/widgets/task_card.dart';
 import 'package:flutter/material.dart';
