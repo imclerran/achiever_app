@@ -1,7 +1,7 @@
 import 'package:achiever_app/bloc/habits/habits_bloc.dart';
 import 'package:achiever_app/data/app_theme.dart';
 import 'package:achiever_app/model/habit.dart';
-import 'package:achiever_app/widgets/new_habit_card.dart';
+import 'package:achiever_app/widgets/habit/new_habit_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

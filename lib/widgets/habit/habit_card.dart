@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:vibration/vibration.dart';
 
-import 'edit_habit_modal.dart';
+import 'habit_modal.dart';
 
 class HabitCard extends StatelessWidget {
   final Habit habit;
@@ -26,12 +26,12 @@ class HabitCard extends StatelessWidget {
         bool hasAmplitudeControl =
             await Vibration.hasAmplitudeControl() ?? false;
         if (hasAmplitudeControl) {
-          Vibration.vibrate(amplitude: 255, duration: 10);
+          Vibration.vibrate(amplitude: 128, duration: 10);
         }
         showModalBottomSheet(
           backgroundColor: Colors.transparent,
           context: context,
-          builder: (context) => EditHabitModal(habit),
+          builder: (context) => HabitModal(habit: habit),
         );
       },
       child: Container(

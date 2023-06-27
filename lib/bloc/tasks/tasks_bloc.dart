@@ -63,6 +63,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
           dateCompleted: isDone ? DateTime.now() : null,
           dueDate: task.dueDate,
           title: task.title,
+          description: task.description,
           priority: task.priority,
           subtasks: task.subtasks,
         );
