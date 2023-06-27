@@ -24,16 +24,17 @@ class _EditHabitModalState extends State<EditHabitModal> {
         topRight: const Radius.circular(10.0),
       ),
       child: Container(
+        //constraints: BoxConstraints(maxHeight: 550),
+        //height: 521,
         padding:
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         color: theme.cardColor2,
-        // height: 300,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("Edit Habit", style: theme.h2),
+              Text("Edit Habit", style: theme.h3),
               SizedBox(height: 8.0),
               _buildModalTitleRow(titleController, theme),
               SizedBox(height: 4.0),

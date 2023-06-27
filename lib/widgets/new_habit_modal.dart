@@ -30,7 +30,7 @@ class _NewHabitModalState extends State<NewHabitModal> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("New Habit", style: theme.h2),
+              Text("New Habit", style: theme.h3),
               SizedBox(height: 8.0),
               _buildModalTitleRow(titleController, theme),
               SizedBox(height: 4.0),
