@@ -26,7 +26,7 @@ class HabitCard extends StatelessWidget {
         bool hasAmplitudeControl =
             await Vibration.hasAmplitudeControl() ?? false;
         if (hasAmplitudeControl) {
-          Vibration.vibrate(amplitude: 255, duration: 10);
+          Vibration.vibrate(amplitude: 128, duration: 10);
         }
         showModalBottomSheet(
           backgroundColor: Colors.transparent,
