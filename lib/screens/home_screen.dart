@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
-//import 'package:achiever_app/data/data.dart';
 import 'package:achiever_app/data/app_theme.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 
@@ -67,28 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   centerTitle: true,
                   titlePadding: EdgeInsets.all(8.0),
                 ),
-                actions: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          Icon(
-                            FontAwesome.plus,
-                            color: AppThemeLight.accentColor,
-                            size: 22.0,
-                          ),
-                          SizedBox(width: 4),
-                          Text(
-                            "New",
-                            style: AppThemeLight.h3,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                actions: [_buildNewTaskActionButton(context)],
               ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
@@ -162,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Center(
           child: Text(
             "You're all caught up... What's next?",
+            style: theme.h4,
           ),
         ),
       );
@@ -179,5 +158,29 @@ class _HomeScreenState extends State<HomeScreen> {
       return TaskCard(
           tasksDueAfterThisWeek[index - sliverListOffsetAfterThisWeek - 1]);
     return Container();
+  }
+
+  Widget _buildNewTaskActionButton(BuildContext context) {
+    var theme = AppTheme(MediaQuery.platformBrightnessOf(context));
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10.0),
+      child: TextButton(
+        onPressed: () {},
+        child: Row(
+          children: [
+            Icon(
+              FontAwesome.plus,
+              color: theme.accentColor,
+              size: 22.0,
+            ),
+            SizedBox(width: 4),
+            Text(
+              "New",
+              style: theme.h3,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
