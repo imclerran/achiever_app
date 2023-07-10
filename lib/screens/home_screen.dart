@@ -1,11 +1,11 @@
 import 'package:achiever_app/model/task.dart';
 import 'package:achiever_app/widgets/habit/habit_list.dart';
+import 'package:achiever_app/widgets/home_app_bar.dart';
 import 'package:achiever_app/widgets/report_card.dart';
 import 'package:achiever_app/widgets/task_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:achiever_app/data/app_theme.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 
@@ -45,29 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
           return CustomScrollView(
             slivers: [
-              SliverAppBar(
-                backgroundColor: theme.primaryColor,
-                forceElevated: true,
-                floating: true,
-                elevation: 4,
-                //brightness: theme.brightness, TODO: update theme to latest theme conventions
-                flexibleSpace: FlexibleSpaceBar(
-                  title: GradientText(
-                    "Achiever",
-                    colors: [
-                      AppThemeLight.accentColor,
-                      AppThemeLight.accentColor2
-                    ],
-                    style: TextStyle(
-                      fontSize: 32.0,
-                      color: AppThemeLight.accentColor,
-                    ),
-                  ),
-                  centerTitle: true,
-                  titlePadding: EdgeInsets.all(8.0),
-                ),
-                actions: [_buildNewTaskActionButton(context)],
-              ),
+              HomeAppBar(),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   _homescreenSliverBuilder,
